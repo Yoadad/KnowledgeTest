@@ -1,0 +1,122 @@
+﻿@model KnowledgeTest.Entities.Test
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.10/angular.min.js"></script>
+@{
+    ViewBag.Title = "Take";
+}
+
+<div ng-app="test" ng-controller="TestController as test">
+    
+    <h2>@Model.Name</h2>
+    <hr />
+    <h3 title="{{test.CurrentQuestion.Name}}">{{''+(test.Index + 1) + '. '+ test.CurrentQuestion.Description}}</h3>
+
+
+    <ul>
+        <li ng-repeat="answer in test.CurrentQuestion.Answers">
+            <b>{{test.Options[$index]}})</b>
+            <input type="radio" ng-show="test.CurrentQuestion.Type == 0" name="Q_{{test.CurrentQuestion.Id}}" ng-click="test.selectAnswer(answer)" ng-checked="answer.Value" />
+            <input type="checkbox" ng-show="test.CurrentQuestion.Type == 1" ng-model="answer.Value" />
+            <span>{{answer.Name}}</span>
+        </li>
+    </ul>
+
+
+    <p>
+        <button type="button" class="btn btn-default" ng-click="test.previousQuestion()">Previous</button>
+        <button type="button" class="btn btn-default" ng-click="test.nextQuestion()">Next</button>
+    </p>
+
+    <p>
+        <h3>Total</h3>
+        {{test.getCorrectAnswers() + '/' +test.Questions.length}}
+    </p>
+    <p>
+        <ul class="pagination">
+            <li><a href="#" ng-click="test.previousQuestion()">&laquo;</a></li>
+            <li><a href="#" ng-repeat="question in test.Questions" ng-click="test.setCurrentQuestion($index)" title="{{question.Description}}">{{$index + 1}}</a></li>
+            <li><a href="#" ng-click="test.nextQuestion()">&raquo;</a></li>
+        </ul>
+    </p>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    <script type="text/javascript">
+
+        angular.module('test', [])
+          .controller('TestController', ['$http', function ($http, $filter) {
+              var self = this;
+              self.Index = 0;
+              self.Questions = [];
+              self.SearchCriteria = '';
+              self.CurrentQuestion;
+              self.Options = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+
+              self.getList = function () {
+                  $http({ method: 'GET', url: '/Test/Questions/@Model.Id' })
+                  .success(function (data) {
+                      self.Questions = data;
+                      self.setCurrentQuestion(self.Index);
+                  }).error(function () {
+                      console.log('error');
+                  });
+              };
+
+              self.setCurrentQuestion = function (index) {
+                  self.CurrentQuestion = self.Questions[index];
+                  self.Index = index;
+              };
+
+              self.nextQuestion = function () {
+
+                  self.Index++;
+                  if (self.Index >= self.Questions.length) {
+                      self.Index = self.Questions.length - 1;
+                  }
+                  self.setCurrentQuestion(self.Index);
+              };
+
+              self.previousQuestion = function () {
+                  self.Index--;
+                  if (self.Index < 0) {
+                      self.Index = 0;
+                  }
+                  self.setCurrentQuestion(self.Index);
+              };
+
+              self.selectAnswer = function (answer) {
+                  for (var i = 0; i < self.CurrentQuestion.Answers.length; i++) {
+                      self.CurrentQuestion.Answers[i].Value = false;
+                      if (self.CurrentQuestion.Answers[i] == answer) {
+                          self.CurrentQuestion.Answers[i].Value = true;
+                      }
+                  }
+              }
+
+              self.getCorrectAnswers = function () {
+                  var result = 0;
+                  var hasError = false;
+                  for (var i = 0; i < self.Questions.length; i++) {
+                      hasError = false;
+                      for (var j = 0; j < self.Questions[i].Answers.length; j++) {
+                          if (self.Questions[i].Answers[j].IsCorrect != self.Questions[i].Answers[j].Value) {
+                              hasError = true;
+                          }
+                      }
+                      if (!hasError) {
+                          result++;
+                      }
+                  }
+                  return result;
+              }
+
+              self.getList();
+          }]);
+
+    </script>
+}
+
+
+
+

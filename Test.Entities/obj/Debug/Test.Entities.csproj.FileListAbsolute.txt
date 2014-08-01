@@ -1,0 +1,5 @@
+D:\Proyectos\KnowledgeTest\Test.Entities\obj\Debug\Test.Entities.csprojResolveAssemblyReference.cache
+D:\Proyectos\KnowledgeTest\Test.Entities\bin\Debug\Test.Entities.dll
+D:\Proyectos\KnowledgeTest\Test.Entities\bin\Debug\Test.Entities.pdb
+D:\Proyectos\KnowledgeTest\Test.Entities\obj\Debug\Test.Entities.dll
+D:\Proyectos\KnowledgeTest\Test.Entities\obj\Debug\Test.Entities.pdb
