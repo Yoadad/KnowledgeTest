@@ -1,5 +1,5 @@
 ﻿@model KnowledgeTest.Entities.Test
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.10/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.17/angular.min.js"></script>
 @{
     ViewBag.Title = "Take";
 }
@@ -16,7 +16,8 @@
             <b>{{test.Options[$index]}})</b>
             <input type="radio" ng-show="test.CurrentQuestion.Type == 0" name="Q_{{test.CurrentQuestion.Id}}" ng-click="test.selectAnswer(answer)" ng-checked="answer.Value" />
             <input type="checkbox" ng-show="test.CurrentQuestion.Type == 1" ng-model="answer.Value" />
-            <span>{{answer.Name}}</span>
+            <span ng-if="answer.IsCorrect"><b>{{answer.Name}}</b></span>
+            <span ng-if="!answer.IsCorrect">{{answer.Name}}</span>
         </li>
     </ul>
 
