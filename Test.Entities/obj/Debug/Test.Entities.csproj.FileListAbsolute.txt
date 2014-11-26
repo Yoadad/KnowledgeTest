@@ -8,3 +8,8 @@ C:\Users\Alejandro\Documents\GitHub\KnowledgeTest\Test.Entities\bin\Debug\Test.E
 C:\Users\Alejandro\Documents\GitHub\KnowledgeTest\Test.Entities\obj\Debug\Test.Entities.csprojResolveAssemblyReference.cache
 C:\Users\Alejandro\Documents\GitHub\KnowledgeTest\Test.Entities\obj\Debug\Test.Entities.dll
 C:\Users\Alejandro\Documents\GitHub\KnowledgeTest\Test.Entities\obj\Debug\Test.Entities.pdb
+D:\Proyectos\KnowledgeTest\KnowledgeTest\Test.Entities\bin\Debug\Test.Entities.dll
+D:\Proyectos\KnowledgeTest\KnowledgeTest\Test.Entities\bin\Debug\Test.Entities.pdb
+D:\Proyectos\KnowledgeTest\KnowledgeTest\Test.Entities\obj\Debug\Test.Entities.csprojResolveAssemblyReference.cache
+D:\Proyectos\KnowledgeTest\KnowledgeTest\Test.Entities\obj\Debug\Test.Entities.dll
+D:\Proyectos\KnowledgeTest\KnowledgeTest\Test.Entities\obj\Debug\Test.Entities.pdb
